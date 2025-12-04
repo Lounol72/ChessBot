@@ -1,6 +1,9 @@
 package game;
 
-public class Game{
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+public class Game implements Runnable {
 	// Composantes principales du jeu 
 	private final GamePanel gamePanel;
 	private final GameWindow gameWindow;

@@ -1,6 +1,7 @@
 package board;
 
 import pieces.Pawn;
+import pieces.PieceInterface;
 import pieces.Piece;
 import java.awt.Graphics;
 

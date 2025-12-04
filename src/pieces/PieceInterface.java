@@ -2,7 +2,7 @@ package pieces;
 
 import java.awt.Graphics;
 
-public interface Pieces {
+public interface PieceInterface {
     public String getType();
     public String getPosition();
     public int getValue();

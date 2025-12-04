@@ -6,7 +6,6 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
-import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
 public class GamePanel extends JPanel {
@@ -18,7 +17,6 @@ public class GamePanel extends JPanel {
         this.game = game;
 
         setPanelSize();
-        addKeyListener(new KeyListener(this));
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
     }

@@ -3,15 +3,11 @@ package pieces;
 import java.awt.Graphics;
 import utilz.*;
 
-public class Pawn implements Pieces {
-    private String position;
-    private String color;
+public class Pawn extends Piece implements PieceInterface {
     private final int value = 1;
 
     public Pawn(String position, String color) {
-        verifyParameters(position, color);
-        this.position = position;
-        this.color = color;
+        super(position, color);
     }
     @Override
     public String getType() {
