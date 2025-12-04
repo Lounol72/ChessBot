@@ -2,11 +2,11 @@ package game;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
 import inputs.MouseInputs;
+import utilz.Constants;
 
 public class GamePanel extends JPanel {
     private MouseInputs mouseInputs;
@@ -22,7 +22,7 @@ public class GamePanel extends JPanel {
     }
 
     private void setPanelSize() {
-        Dimension size = new Dimension(800, 600);
+        Dimension size = new Dimension(Constants.WIDTH, Constants.HEIGHT);
         setPreferredSize(size);
     }
 

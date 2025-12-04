@@ -1,7 +1,10 @@
 package game;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+
+import states.GameState;
+import states.Menu;
+import states.Playing;
 
 public class Game implements Runnable {
 	// Composantes principales du jeu 
@@ -13,6 +16,10 @@ public class Game implements Runnable {
 	private final int FPS_SET = 120;
 	private final int UPS_SET = 200;
 
+	// States
+	private Playing playing;
+	private Menu menu;
+
 	// FPS/UPS tracking
 	private int currentFPS = 0;
 	private int currentUPS = 0;
@@ -22,14 +29,14 @@ public class Game implements Runnable {
 		gamePanel = new GamePanel(this);
 		gameWindow = new GameWindow(gamePanel);
 		gamePanel.setFocusable(true);
-		gamePanel.resquestFocus();
+		gamePanel.requestFocus();
 
 		startGameLoop();
 	}
 
 	private void initClasses(){
-		// TODO : implement this method
-		throw new NotBoundException();
+		playing = new Playing();
+		menu = new Menu();
 	}
 
 	private void startGameLoop(){
@@ -38,19 +45,28 @@ public class Game implements Runnable {
 	}
 
 	private void update(){
-		// TODO : implement this method
-		throw new NotBoundException();
+		switch(GameState.currentState){
+			case GAME -> playing.update();
+			case MENU -> menu.update();
+			default -> {
+                }
+		}
 	}
 
 	public void render(Graphics g){
-		// TODO : implement this method
-		throw new NotBoundException();	
+		switch(GameState.currentState){
+			case GAME -> playing.draw(g);
+			case MENU -> menu.draw(g);
+			default -> {
+				throw new IllegalArgumentException("Invalid game state: " + GameState.currentState);
+                }
+		}
 	}
 
 	@Override
 	public void run(){
 		double timePerFrame = 1000000000.0 / FPS_SET;
-		double tmePerUpdate = 1000000000.0 / UPS_SET;
+		double timePerUpdate = 1000000000.0 / UPS_SET;
 
 		long previousTime = System.nanoTime();
 		int frames = 0;
@@ -78,11 +94,19 @@ public class Game implements Runnable {
 			}
 			if (System.currentTimeMillis() - lastCheck >= 1000){
 				lastCheck = System.currentTimeMillis();
-				currentFps = frames;
+				currentFPS = frames;
 				currentUPS = updates;
 				frames = 0;
 				updates = 0;
 			}
 		}
+	}
+
+	public Playing getPlaying() {
+		return playing;
+	}
+
+	public Menu getMenu() {
+		return menu;
 	}
 }
